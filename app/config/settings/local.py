@@ -2,7 +2,6 @@ from .base import *
 
 
 DEBUG = True
-
 ALLOWED_HOSTS = [
     'localhost',
 ]
@@ -11,6 +10,7 @@ ALLOWED_HOSTS = [
 WSGI_APPLICATION = 'config.wsgi.local.application'
 
 
+# DB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -18,10 +18,12 @@ DATABASES = {
     }
 }
 
+# Media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 
-STATIC_URL = '/static/'
 
-
+# Log
 LOG_DIR = os.path.join(ROOT_DIR, '.log')
 LOGGING = {
     'version': 1,
