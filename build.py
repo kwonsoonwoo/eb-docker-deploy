@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-MODES = ['base', 'local', 'dev']
+MODES = ['base', 'local', 'dev', 'production']
 
 
 def get_mode():
@@ -70,7 +70,7 @@ def build_local():
     finally:
         # 끝난 후 requirements.txt파일 삭제
         os.remove('requirements.txt')
-        
+
 
 def build_dev():
     try:
@@ -82,6 +82,16 @@ def build_dev():
         # 끝난 후 requirements.txt파일 삭제
         os.remove('requirements.txt')
 
+
+def build_production():
+    try:
+        # pipenv lock으로 requirements.txt생성
+        subprocess.call('pipenv lock --requirements > requirements.txt', shell=True)
+        # docker build
+        subprocess.call('docker build -t eb-docker:production -f Dockerfile.production .', shell=True)
+    finally:
+        # 끝난 후 requirements.txt파일 삭제
+        os.remove('requirements.txt')
 
 if __name__ == '__main__':
     mode = get_mode()
