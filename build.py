@@ -2,7 +2,7 @@ import argparse
 import os
 import subprocess
 
-MODES = ['base', 'local']
+MODES = ['base', 'local', 'dev']
 
 
 def get_mode():
