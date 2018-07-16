@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import argparse
 import os
 import subprocess
@@ -7,6 +8,7 @@ MODES = ['base', 'local', 'dev', 'production']
 
 
 def get_mode():
+    print('getmode')
     # ./build.py --mode <mode>
     # ./build.py -m <mode>
     parser = argparse.ArgumentParser()
@@ -16,11 +18,10 @@ def get_mode():
     )
     args = parser.parse_args()
 
-
     # 모듈 호출에 옵션으로 mode를 전달한 경우
     if args.mode:
         mode = args.mode.strip().lower()
-    # 사용자가 입력으로 mode를 선택한 경우
+    # 사용자 입력으로 mode를 선택한 경우
     else:
         while True:
             print('Select mode')
@@ -32,7 +33,7 @@ def get_mode():
                 mode = MODES[mode_index]
                 break
             except IndexError:
-                print('1~2번을 입력하세요')
+                print('1 ~ 2번을 입력하세요')
     return mode
 
 
@@ -88,10 +89,12 @@ def build_production():
         # pipenv lock으로 requirements.txt생성
         subprocess.call('pipenv lock --requirements > requirements.txt', shell=True)
         # docker build
-        subprocess.call('docker build -t eb-docker:production -f Dockerfile.production .', shell=True)
+        subprocess.call('docker build -t eb-docker:production -f Dockerfile.production .',
+                        shell=True)
     finally:
         # 끝난 후 requirements.txt파일 삭제
         os.remove('requirements.txt')
+
 
 if __name__ == '__main__':
     mode = get_mode()
