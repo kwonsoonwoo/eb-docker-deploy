@@ -7,5 +7,10 @@ __all__ = (
 )
 
 
+class S3StaticStrorage(S3Boto3Storage):
+    location = 'static'
+
+
+
 class S3DefaultStorage(S3Boto3Storage):
     location = 'media'
