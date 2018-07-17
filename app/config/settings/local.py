@@ -18,11 +18,6 @@ DATABASES = {
     }
 }
 
-# Media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
-
-
 # Log
 LOG_DIR = os.path.join(ROOT_DIR, '.log')
 LOGGING = {

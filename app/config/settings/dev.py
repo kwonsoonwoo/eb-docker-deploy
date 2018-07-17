@@ -1,5 +1,5 @@
 from .base import *
-from ..storages import S3DefaultStorage
+
 secrets = json.load(open(os.path.join(SECRETS_DIR, 'dev.json')))
 
 DEBUG = True
